@@ -27,6 +27,8 @@ python -m venv .venv
 
 No NI-VISA needed: `pyvisa-py` talks to the serial port directly.
 
+The GUI tool will then be available in `.venv/Scripts/hp54645d-gui.exe`
+
 On the scope's front panel, in the I/O setup of the RS-232 interface module
 (HP 54651A or 54652B, fitted at the rear):
 
