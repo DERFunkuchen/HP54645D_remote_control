@@ -18,6 +18,9 @@ for what the instrument turned out to do that the manual does not say.
 
 ## Set up
 
+Needs Python 3.11 or newer. On Windows, in Command Prompt or PowerShell (in
+Git Bash, write the paths with forward slashes: `.venv/Scripts/python.exe`):
+
 ```bash
 git clone https://github.com/DERFunkuchen/HP54645D_remote_control.git
 cd HP54645D_remote_control
@@ -25,9 +28,52 @@ python -m venv .venv
 .venv\Scripts\python.exe -m pip install .
 ```
 
-No NI-VISA needed: `pyvisa-py` talks to the serial port directly.
+That creates a private Python environment in `.venv` and installs the tool
+and everything it needs into it. No NI-VISA needed: `pyvisa-py` talks to the
+serial port directly. The first install downloads the dependencies, so it
+needs internet.
 
-The GUI tool will then be available in `.venv/Scripts/hp54645d-gui.exe`
+**Start the GUI** by double-clicking `.venv\Scripts\hp54645d-gui.exe`, or from
+the terminal:
+
+```bash
+.venv\Scripts\hp54645d-gui.exe
+```
+
+The launcher belongs to that `.venv`: delete or move the folder and it stops
+working. Pin a shortcut to it if you use it often.
+
+**To change the code**, install it *editable* with the test tools instead;
+your edits then take effect without reinstalling:
+
+```bash
+.venv\Scripts\python.exe -m pip install -e ".[dev]"
+```
+
+On Linux or macOS, the same with `.venv/bin/` in place of `.venv\Scripts\`
+(and no `.exe`).
+
+<details>
+<summary>Optional: "activating" the environment</summary>
+
+Activation only saves typing: afterwards `python`, `pip` and `hp54645d-gui`
+mean the ones in `.venv` for as long as that terminal is open. Everything
+above works without it. The command depends on the terminal:
+
+| Terminal | Command |
+|---|---|
+| Command Prompt | `.venv\Scripts\activate.bat` |
+| PowerShell | `.venv\Scripts\Activate.ps1` |
+| Git Bash | `source .venv/Scripts/activate` |
+| Linux / macOS | `source .venv/bin/activate` |
+
+PowerShell refuses to run it by default (*"running scripts is disabled on this
+system"*). Allow it for the current window only with
+`Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass`, or use Command
+Prompt.
+</details>
+
+### On the scope
 
 On the scope's front panel, in the I/O setup of the RS-232 interface module
 (HP 54651A or 54652B, fitted at the rear):
@@ -40,12 +86,9 @@ On the scope's front panel, in the I/O setup of the RS-232 interface module
 
 ## The GUI
 
-```bash
-hp54645d-gui          # or: python -m hp54645d
-```
-
-Enter the address (`ASRL5::INSTR` is COM5), *Connect*. The form fills with
-the scope's current settings.
+Start `.venv\Scripts\hp54645d-gui.exe` (see *Set up*). Enter the address
+(`ASRL5::INSTR` is COM5), *Connect*. The form fills with the scope's current
+settings.
 
 - **Screenshot** — reads what the screen shows right now, changes nothing.
 - **Live** — repeats the screenshot until unticked. Over RS-232 that is about
