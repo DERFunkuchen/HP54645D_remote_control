@@ -22,8 +22,7 @@ for what the instrument turned out to do that the manual does not say.
 git clone https://github.com/DERFunkuchen/HP54645D_remote_control.git
 cd HP54645D_remote_control
 python -m venv .venv
-.venv\Scripts\activate          # Windows; on Linux/macOS: source .venv/bin/activate
-pip install -e ".[dev]"
+.venv\Scripts\python.exe -m pip install .
 ```
 
 No NI-VISA needed: `pyvisa-py` talks to the serial port directly.
