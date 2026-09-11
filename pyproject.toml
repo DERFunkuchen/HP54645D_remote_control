@@ -1,0 +1,63 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hp54645d-remote-control"
+version = "0.1.0"
+description = "Remote control, waveform readout and a small GUI for the HP 54645D mixed-signal oscilloscope"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{ name = "DERFunkuchen" }]
+keywords = ["oscilloscope", "HP 54645D", "HP 54645A", "RS-232", "VISA", "test equipment"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering",
+    "Topic :: System :: Hardware :: Hardware Drivers",
+]
+dependencies = [
+    # pyvisa-py is the pure-Python VISA back-end, so no NI-VISA install is
+    # needed; pyvisa still prefers NI-VISA when it is present. pyserial is what
+    # pyvisa-py uses for RS-232.
+    "pyvisa>=1.14",
+    "pyvisa-py>=0.7",
+    "pyserial>=3.5",
+    "numpy>=1.26",
+    # Plotting is half of what this tool is for, so it is not optional.
+    "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.6"]
+
+[project.urls]
+Homepage = "https://github.com/DERFunkuchen/HP54645D_remote_control"
+Issues = "https://github.com/DERFunkuchen/HP54645D_remote_control/issues"
+
+[project.gui-scripts]
+hp54645d-gui = "hp54645d.gui:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["hp54645d"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "D"]
+ignore = ["D203", "D213"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D103"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"

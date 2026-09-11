@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Environments
+.venv/
+venv/
+
+# Tool caches
+.pytest_cache/
+.ruff_cache/
+
+# Captures and plots written by the tool or the examples. Named directories
+# rather than *.csv / *.png, so a test fixture of either type is never
+# swallowed by accident.
+captures/
+results/
+
+# The HP programmer's guide is HP/Keysight's copyright and is not ours to
+# redistribute. Keep a local copy in docs/manuals/ if you like; it is never
+# committed. docs/manuals/README.md says where to find it.
+docs/manuals/*.pdf
+
+# Editors and OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
